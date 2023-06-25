@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 翻页效果</title>
+</head>
+<style>
+    .book {
+      width: 300px;
+      height: 400px;
+      margin: 150px auto 300px;
+      /* 透视的视距 */
+      perspective: 1000px;
+    }
+    /* 等下翻页，翻转的就是这个盒子 */
+    .page,
+    .page2 {
+      width: 300px;
+      height: 400px;
+      /* 定位 */
+      position: absolute;
+      left: 0;
+      top: 0;
+      /* 子元素在3D空间中呈现 */
+      transform-style: preserve-3d;
+      /* 旋转的基点为左边中间 */
+      transform-origin: 0 50%;
+      /* 过渡动画 */
+      transition: all 2s;
+    }
+    .book:hover .page {
+      /* 绕Y轴旋转-180deg */
+      transform: rotateY(-180deg);
+    }
+    .page-item {
+      width: 300px;
+      height: 400px;
+    }
+    .front {
+      background-color: powderblue;
+    }
+    .back {
+      background-color: tomato;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      /* 延z轴向后移动1像素，然后绕Y轴旋转-180deg */
+      transform: translateZ(-1px) rotateY(-180deg);
+    }
+  </style>
+  <body>
+    <div class="book">
+      <!-- 每一页分为前和后两部分 -->
+      <div class="page" style="z-index: 2">
+        <div class="page-item front">
+          <img src="images/cover1.jpg" alt="" />
+        </div>
+        <div class="page-item back">
+          <img src="./images/cover2.jpg" alt="" />
+        </div>
+      </div>
+      <div class="page2">
+        <img src="./images/front.jpg" alt="" />
+      </div>
+    </div>
+  </body>
+</html>
